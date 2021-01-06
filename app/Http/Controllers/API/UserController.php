@@ -28,7 +28,22 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = $request->validate([
+            'name'     => 'required',
+            'email'    => 'required',
+            'password' => 'required'
+        ]);
+        try{
+            $user = User::create($user);
+            return Response(
+                "Usuário Criado com Sucesso",
+                Response::HTTP_CREATED,
+            );
+        } catch(\Throwable $th){
+            return Response(
+               "Erro ao criar o usuário tente mais tarde", 400,
+            );
+        }
     }
 
     /**
