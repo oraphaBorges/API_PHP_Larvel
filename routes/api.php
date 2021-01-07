@@ -20,6 +20,9 @@ use App\Http\Controllers\API;
 // });
 
 Route::post('auth/login', [API\AuthController::class,'login']);
+Route::post('auth/signup',[API\UserController::class, 'store']);
 
-Route::get('users',[API\UserController::class, 'index']);
-Route::post('users',[API\UserController::class, 'store']);
+Route::group(['middleware' => 'apiJwt'], function () {
+    Route::get('users',[API\UserController::class, 'index']);
+    
+});
