@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,5 +19,7 @@ use App\Http\Controllers\API\UserController;
 //     return $request->user();
 // });
 
-Route::get('users',[UserController::class, 'index']);
-Route::post('users',[UserController::class, 'store']);
+Route::post('auth/login', [API\AuthController::class,'login']);
+
+Route::get('users',[API\UserController::class, 'index']);
+Route::post('users',[API\UserController::class, 'store']);
