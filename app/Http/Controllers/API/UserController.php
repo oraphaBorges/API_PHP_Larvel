@@ -34,14 +34,14 @@ class UserController extends Controller
             'password' => 'required|min:6'
         ]);
         try{
+            $user['password'] = bcrypt($user['password']);
             $user = User::create($user);
             return Response(
-                "Usuário Criado com Sucesso",
-                Response::HTTP_CREATED,
+                "Usuário Criado com Sucesso",200
             );
         } catch(\Throwable $th){
             return Response(
-               "Erro ao criar o usuário tente mais tarde", 400,
+               "Erro ao criar o usuário tente mais tarde", 400
             );
         }
     }
